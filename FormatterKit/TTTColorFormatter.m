@@ -86,14 +86,14 @@ static void TTTGetHSLComponentsFromColor(UIColor *color, CGFloat *hue, CGFloat *
     CGFloat r = 0.0f, g = 0.0f, b = 0.0f;
     TTTGetRGBAComponentsFromColor(color, &r, &g, &b, NULL);
 
-    return [NSString stringWithFormat:@"#%02X%02X%02X", (NSUInteger)roundf(r * 0xFF), (NSUInteger)roundf(g * 0xFF), (NSUInteger)roundf(b * 0xFF)];
+    return [NSString stringWithFormat:@"#%02lX%02lX%02lX", (unsigned long)roundf(r * 0xFF), (unsigned long)roundf(g * 0xFF), (unsigned long)roundf(b * 0xFF)];
 }
 
 - (UIColor *)colorFromHexadecimalString:(NSString *)string {
     NSScanner *scanner = [NSScanner scannerWithString:string];
     scanner.charactersToBeSkipped = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
 
-    NSUInteger value;
+    unsigned int value;
     [scanner scanHexInt:&value];
 
     CGFloat r = ((value & 0xFF0000) >> 16) / 255.0f;
@@ -109,7 +109,7 @@ static void TTTGetHSLComponentsFromColor(UIColor *color, CGFloat *hue, CGFloat *
     CGFloat r = 0.0f, g = 0.0f, b = 0.0f;
     TTTGetRGBAComponentsFromColor(color, &r, &g, &b, NULL);
 
-    return [NSString stringWithFormat:@"rgb(%d, %d, %d)", (NSUInteger)roundf(r * 0xFF), (NSUInteger)roundf(g * 0xFF), (NSUInteger)roundf(b * 0xFF)];
+    return [NSString stringWithFormat:@"rgb(%ld, %ld, %ld)", (unsigned long)roundf(r * 0xFF), (unsigned long)roundf(g * 0xFF), (unsigned long)roundf(b * 0xFF)];
 }
 
 - (UIColor *)colorFromRGBString:(NSString *)string {
@@ -122,7 +122,7 @@ static void TTTGetHSLComponentsFromColor(UIColor *color, CGFloat *hue, CGFloat *
     CGFloat r = 0.0f, g = 0.0f, b = 0.0f, a = 0.0f;
     TTTGetRGBAComponentsFromColor(color, &r, &g, &b, &a);
 
-    return [NSString stringWithFormat:@"rgb(%d, %d, %d, %g)", (NSUInteger)roundf(r * 0xFF), (NSUInteger)roundf(g * 0xFF), (NSUInteger)roundf(b * 0xFF), a];
+    return [NSString stringWithFormat:@"rgb(%ld, %ld, %ld, %g)", (unsigned long)roundf(r * 0xFF), (unsigned long)roundf(g * 0xFF), (unsigned long)roundf(b * 0xFF), a];
 
 }
 
@@ -130,7 +130,7 @@ static void TTTGetHSLComponentsFromColor(UIColor *color, CGFloat *hue, CGFloat *
     NSScanner *scanner = [NSScanner scannerWithString:string];
     scanner.charactersToBeSkipped = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
 
-    NSInteger r, g, b; CGFloat a;
+    NSInteger r, g, b; float a;
     [scanner scanInteger:&r];
     [scanner scanInteger:&g];
     [scanner scanInteger:&b];
@@ -162,7 +162,7 @@ static void TTTGetHSLComponentsFromColor(UIColor *color, CGFloat *hue, CGFloat *
     CGFloat h = 0.0f, s = 0.0f, l = 0.0f;
     TTTGetHSLComponentsFromColor(color, &h, &s, &l);
 
-    return [NSString stringWithFormat:@"hsl(%d, %g%%, %g%%)", (NSUInteger)roundf(h * 0xFF), s * 100.0f, l * 100.0f];
+    return [NSString stringWithFormat:@"hsl(%ld, %g%%, %g%%)", (unsigned long)roundf(h * 0xFF), s * 100.0f, l * 100.0f];
 }
 
 - (UIColor *)colorFromHSLString:(NSString *)string {
